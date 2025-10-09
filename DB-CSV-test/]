@@ -1,0 +1,35 @@
+import pandas as pd
+import sqlite3
+import numpy as np
+import time
+import random
+
+datasets = {
+        1000:      "./datasets/dataset_1K.csv",
+        10000:     "./datasets/dataset_10K.csv",
+        100000:    "./datasets/dataset_100K.csv",
+        1000000:   "./datasets/dataset_1M.csv",
+}
+
+databases = {
+        1000:      "./datasets/db_1K.sqlite",
+        10000:     "./datasets/db_10K.sqlite",
+        100000:    "./datasets/db_100k.sqlite",
+        1000000:   "./datasets/db_1M.sqlite",
+}
+
+
+for size, file in databases.items():
+    conn = sqlite3.connect(file)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM data")
+    result = cur.fetchall()
+    print(result)
+    conn.close()
+
+def csv_test(file, size):
+    dataframe = pd.read_csv(file)
+
+
+
+    
