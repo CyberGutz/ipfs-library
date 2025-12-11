@@ -51,7 +51,13 @@ func main() {
 	// Indexa as linhas do csv. Chamando o map, vamos achar o índice da matriz de strings do qual o nome pertence
 	indexes := mapBookIndex(csvPath)
 
-	var newDatabaseData [][]string
+	// Abre um novo arquivo pro database
+	newcsvfile, newFileError := os.Create("ipfsbooks.csv")
+	handleError(newFileError)
+	defer closeFile(newcsvfile)
+	newDatabase := csv.NewWriter(newcsvfile)
+
+	// var newDatabaseData [][]string
 
 	count := 0
 
@@ -93,30 +99,18 @@ func main() {
 					// Monta a linha do CSV atual + CID recuperado
 					var newRecord []string
 					for _, field := range record {
-						newRecord = append(newRecord, field, ",")
+						newRecord = append(newRecord, field)
 					}
 					newRecord = append(newRecord, cid)
 					fmt.Println("Linha completa: ")
 					fmt.Println(newRecord)
 					// Adiciona a nova linha no novo arquivo csv
-					newDatabaseData = append(newDatabaseData, newRecord)
-				}
-				if count == 4 {
-					return fileError
+					// newDatabaseData = append(newDatabaseData, newRecord)
+					writeError := newDatabase.Write(newRecord)
+					handleError(writeError)
 				}
 			}
 			return fileError
 		})
 	handleError(walkError)
-
-	// Abre um novo arquivo pro database
-	csvFile, csvError := os.Open("./ipfsbooks.csv")
-	handleError(csvError)
-	defer closeFile(csvFile)
-
-	// Escreve os dados montados no walk
-	fd := csvFile.Fd()
-	newDatabase := csv.NewWriter(os.NewFile(fd, "./ipfsbooks.csv"))
-	writeError := newDatabase.WriteAll(newDatabaseData)
-	handleError(writeError)
 }
