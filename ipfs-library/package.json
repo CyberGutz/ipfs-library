@@ -21,6 +21,8 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
+		"helia": "^6.1.4",
+		"ipfs-provider": "^2.1.0",
 		"papaparse": "^5.5.3"
 	}
 }
