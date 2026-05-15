@@ -53,7 +53,7 @@ function nextPage(){
 function prevPage(){
 	if (start > 0){
 		start -= mod;
-		end -= mod;;
+		end -= mod;
 		exibido = acervo.slice(start, end)
 	}
 	return;
