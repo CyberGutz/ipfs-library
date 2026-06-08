@@ -1,5 +1,6 @@
 <script>
 import { parseCSV } from '$lib/csvParse';
+import BookPage from './BookPage.svelte';
 
 const url = "http://localhost:8080/ipfs/QmNcou4jH6m3Jd6H5orQDWzoUVXsX8e6YmLsYcoCUhQUAB";
 
@@ -9,6 +10,8 @@ let start = $state(0);
 let end = $state(mod);
 let acervo = $state([]);
 let exibido = $state([]);
+let selecionado = $state();
+let metadados = $state();
 
 let fetchPromise = fetch(url)
 	.then(response => response.text())
@@ -81,9 +84,17 @@ Carregando acervo...
 		{#if exibido.length <= 0}
 			Livro não encontrado!
 			<button onclick={returnHome}>retorne ao acervo</button>
+		
+		{:else if selecionado != null}
+			<button onclick={() => selecionado = null}>retorne ao acervo</button>
+			<hr/>
+			<BookPage {selecionado}/>
 		{:else}
 			{#each exibido as linha (linha.id)}
-				<li><a href="http://localhost:8080/ipfs/{linha.cid}" download="{linha.title}.txt">{linha.title}</a></li>
+				<!-- <li><a href="http://localhost:8080/ipfs/{linha.cid}" download="{linha.title}.txt">{linha.title}</a></li> -->
+				 <li><a href="localhost:8080" onclick={() => {
+					selecionado = linha; 
+					return false;}}>{linha.title}</a></li>
 			{/each}
 		{/if}
 	</ul>

@@ -21,8 +21,14 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
+		"@helia/unixfs": "^7.2.1",
+		"blockstore-idb": "^4.0.1",
+		"datastore-idb": "^5.0.1",
 		"helia": "^6.1.4",
 		"ipfs-provider": "^2.1.0",
 		"papaparse": "^5.5.3"
+	},
+	"overrides": {
+		"interface-datastore": "^9.0.3"
 	}
 }
