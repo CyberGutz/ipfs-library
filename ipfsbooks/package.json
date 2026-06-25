@@ -24,7 +24,9 @@
 		"@helia/unixfs": "^7.2.1",
 		"blockstore-idb": "^4.0.1",
 		"datastore-idb": "^5.0.1",
-		"helia": "^6.1.4"
+		"dexie": "^4.4.4",
+		"helia": "^6.1.4",
+		"papaparse": "^5.5.4"
 	},
 	"overrides": {
 		"interface-datastore": "9.0.3"

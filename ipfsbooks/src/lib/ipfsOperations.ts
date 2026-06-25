@@ -1,15 +1,18 @@
 import type { Helia } from "helia";
 import { startHelia } from "./heliaInstance";
 import type { UnixFS } from "@helia/unixfs";
-import type { CID } from "multiformats";
+import { CID } from "multiformats";
 
-const instancia = await startHelia();
+const instancia = await startHelia();   
 let helia: Helia, fs:UnixFS;
 
 helia = instancia.helia;
 fs = instancia.fs;
 
-export async function readCID(cid:CID){
+export async function readCID(cidString:string){
+
+    const cid = CID.parse(cidString)
+
     const chunks = [];
 
     for await (const chunk of fs.cat(cid)){
@@ -28,8 +31,8 @@ export async function readCID(cid:CID){
     return arq;
 }
 
-export async function downloadCID(cid:CID, nome:string, tipoMime:string){
-    const bytes = await readCID(cid);
+export async function downloadCID(cidString:string, nome:string, tipoMime:string){
+    const bytes = await readCID(cidString);
 
     const blob = new Blob([bytes], { type: tipoMime })
     const url = URL.createObjectURL(blob);
@@ -44,7 +47,8 @@ export async function downloadCID(cid:CID, nome:string, tipoMime:string){
     URL.revokeObjectURL(url);
 }
 
-export async function provideCID(cid:CID){
+export async function provideCID(cidString:string){
+    const cid = CID.parse(cidString);
     try{
         await helia.routing.provide(cid);
     } catch (err){
@@ -52,7 +56,8 @@ export async function provideCID(cid:CID){
     }
 }
 
-export async function pinCID(cid:CID){
+export async function pinCID(cidString:string){
+    const cid = CID.parse(cidString);
     try{
         await helia.pins.add(cid);
     }
