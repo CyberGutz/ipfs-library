@@ -1,8 +1,14 @@
 <script>
 import { parseCSV } from '$lib/csvParse';
 import BookPage from './BookPage.svelte';
+import { iniciarHelia } from '$lib/startHelia';
+import { unixfs } from '@helia/unixfs';
+const helia = iniciarHelia();
+const fs = unixfs(helia);
 
 const url = "http://localhost:8080/ipfs/QmNcou4jH6m3Jd6H5orQDWzoUVXsX8e6YmLsYcoCUhQUAB";
+
+
 
 const mod = 500;
 let pesquisa = $state('');

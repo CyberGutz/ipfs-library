@@ -2,16 +2,27 @@ import type { Helia } from "helia";
 import { startHelia } from "./heliaInstance";
 import type { UnixFS } from "@helia/unixfs";
 import { CID } from "multiformats";
+import { base32 } from "multiformats/bases/base32";
 
-const instancia = await startHelia();   
-let helia: Helia, fs:UnixFS;
+function cleanCID(cid: string){
+	const clean = cid.trim();
 
-helia = instancia.helia;
-fs = instancia.fs;
+	if (clean.startsWith('Qm'))
+		return CID.parse(clean);
+	else
+		return CID.parse(clean, base32);
+}
 
 export async function readCID(cidString:string){
 
-    const cid = CID.parse(cidString)
+	const { fs } = await startHelia();
+
+	console.log("iniciou o helia: ", fs);
+	 console.log(cidString);
+
+    const cid = cleanCID(cidString);
+
+    console.log(cid);
 
     const chunks = [];
 
@@ -48,16 +59,18 @@ export async function downloadCID(cidString:string, nome:string, tipoMime:string
 }
 
 export async function provideCID(cidString:string){
-    const cid = CID.parse(cidString);
+	const { helia } = await startHelia();
+    const cid = cleanCID(cidString);
     try{
         await helia.routing.provide(cid);
     } catch (err){
-        console.error("Failed providing {cid}")
+        console.error(`Failed providing {cid}`)
     }
 }
 
 export async function pinCID(cidString:string){
-    const cid = CID.parse(cidString);
+	const { helia } = await startHelia();
+    const cid = cleanCID(cidString);
     try{
         await helia.pins.add(cid);
     }
@@ -68,6 +81,6 @@ export async function pinCID(cidString:string){
     try{
         await helia.pins.isPinned(cid);
     }catch(err){
-        console.error("{Error: cid.toString()} did not stay pinned")
+        console.error(`{Error: cid.toString()} did not stay pinned`)
     }
 }

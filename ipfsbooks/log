@@ -1,0 +1,24 @@
+
+> ipfsbooks@0.0.1 build
+> vite build
+
+vite v8.0.16 building ssr environment for production...
+[2Ktransforming...✓ 150 modules transformed.
+rendering chunks...
+vite v8.0.16 building client environment for production...
+[2Ktransforming...✓ 1594 modules transformed.
+rendering chunks...
+computing gzip size...
+.svelte-kit/output/client/_app/version.json                           0.02 kB │ gzip:   0.04 kB
+.svelte-kit/output/client/.vite/manifest.json                         2.12 kB │ gzip:   0.46 kB
+.svelte-kit/output/client/_app/immutable/chunks/xihTtKlq.js           0.06 kB │ gzip:   0.08 kB
+.svelte-kit/output/client/_app/immutable/entry/start.BCTDoQIP.js      0.07 kB │ gzip:   0.08 kB
+.svelte-kit/output/client/_app/immutable/nodes/1.DzC6rKNq.js          0.62 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/chunks/kNaey6uv.js           1.20 kB │ gzip:   0.68 kB
+.svelte-kit/output/client/_app/immutable/nodes/0.BoHhSBfa.js          2.47 kB │ gzip:   1.03 kB
+.svelte-kit/output/client/_app/immutable/entry/app.CNZOc8AU.js        2.66 kB │ gzip:   1.21 kB
+.svelte-kit/output/client/_app/immutable/chunks/CGZr2tdh.js          26.17 kB │ gzip:  10.17 kB
+.svelte-kit/output/client/_app/immutable/chunks/CzkjyGiw.js          39.73 kB │ gzip:  15.25 kB
+.svelte-kit/output/client/_app/immutable/nodes/2.BiIWQwOG.js      1,356.63 kB │ gzip: 416.03 kB
+
+✓ built in 1.43s

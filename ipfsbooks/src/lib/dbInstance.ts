@@ -29,16 +29,34 @@ export { db };
 export async function catalogSync(){
     if(await db.livros.count() <= 0){
         try{
-            const arq = await readCID('QmNcou4jH6m3Jd6H5orQDWzoUVXsX8e6YmLsYcoCUhQUAB');
-            const parsed = await parseCSV(new TextDecoder().decode(arq));
+		console.log("1. Banco vazio! Iniciando a busca pelo CID na rede")
+            const arq = await readCID('bafybeibwrtbhpjpsyoa534ypr7b63mmwgslscpgtsenuh66zdyn5os2rxa'); // CID está no pinata, pra contornar meus problemas com CGNAT.
+
+		console.log("2. Arquivo encontrado e baixado! Tamanho:", arq.length);
+        console.log("2.1 Arquivo em texto: ", arq.toString());
+		console.log("3. Iniciando o processamento do CSV...");
+
+            const parsed: Promise<any> = await parseCSV(new TextDecoder().decode(arq));
             
-            await db.livros.bulkPut(parsed);
+            await db.livros.bulkPut(await parsed);
+        console.log("3.1 Arquivo parseado: ", parsed);
+        console.log("3.2 DB: ", db.livros);
+
+	    console.log("4. Finalizado!");
         }
+
         catch (erro){
             console.error("Falha ao ler o CSV: ", erro);
         }
     }
     return;
+}
+
+export async function bookList(offset: number = 0, limit: number = 50){
+	return await db.livros
+		.offset(offset*limit)
+		.limit(limit)
+		.toArray();
 }
 
 export async function searchBooks(termoBusca:string){
