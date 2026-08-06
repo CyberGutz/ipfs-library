@@ -43,7 +43,7 @@
 {#each books as book}
 <li>
 	{book.titulo} 
-	<button onclick={()=> downloadCID(book.cid)}>
+	<button onclick={()=> downloadCID(book.cid, book.titulo, "text/plain")}>
 		download
 	</button>
 </li>

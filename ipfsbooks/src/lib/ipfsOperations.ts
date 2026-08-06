@@ -56,6 +56,11 @@ export async function downloadCID(cidString:string, nome:string, tipoMime:string
 
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+	
+    console.log("Download concluído!. Iniciando tentativa de pinar o cid");
+    console.log("Dados pré-referência:");
+    console.log(`CID: ${cidString},  bytes: ${bytes}`);
+    await pinCID(cidString, bytes);
 }
 
 export async function provideCID(cidString:string){
@@ -64,23 +69,50 @@ export async function provideCID(cidString:string){
     try{
         await helia.routing.provide(cid);
     } catch (err){
-        console.error(`Failed providing {cid}`)
+        console.error(`Failed providing ${cid}: ${err}`)
     }
 }
 
-export async function pinCID(cidString:string){
-	const { helia } = await startHelia();
-    const cid = cleanCID(cidString);
-    try{
-        await helia.pins.add(cid);
-    }
-    catch(err){
-        console.error("Error ocurred while pinning {cid}")
-    }
+export async function pinCID(cidString:string="", bytes:Uint8Array=new Uint8Array(0)){
+	const { helia, fs } = await startHelia();
+	let objectBytes;
 
-    try{
-        await helia.pins.isPinned(cid);
-    }catch(err){
-        console.error(`{Error: cid.toString()} did not stay pinned`)
-    }
+	console.log(`Pinando CID: cidString: ${cidString}, bytes: ${bytes}`);
+
+	bytes.length == 0 ? objectBytes = await readCID(cidString) : objectBytes = bytes;
+
+	console.log("Verificação  OK. objectBytes: ", objectBytes);
+
+	const cid = await fs.addFile({
+		content: objectBytes,
+		path: `./{cidString}.txt`
+	});
+
+	console.log("Objeto adicionado ao IPFS com sucesso. CID retornado: ", cid.toString());
+
+	try{
+		console.log("Tentativa de provisionar o cid na rede IPFS..");
+		await helia.routing.provide(cid);
+	}
+	catch(err){
+		console.error(`Erro ao provisionar o cid na rede: ${err}`);
+	}
+
+	try{
+		await helia.pins.add(cid);
+		const pin = await helia.pins.get(cid);
+		console.log("Arquivo pinado com sucesso!: ", pin);
+	}
+	catch(err){
+		console.error(`Erro ocorrido ao tentar pinar ${cid}: ${err}`)
+	}
+
+	try{
+		await helia.pins.isPinned(cid) ? 
+			console.log(`O CID ${cid.toString()} se manteu pinado com sucesso`) :
+			console.log(`${cid.toString()} não se manteu pinado!`);
+	}
+	catch(err){
+		console.error(`Erro ao tentar verificar o estado do pin ${err}`);
+	}
 }

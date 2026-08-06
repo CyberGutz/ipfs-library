@@ -66,7 +66,7 @@ export async function startHelia(): Promise<HeliaInstance> {
             blockBrokers: [
                 bitswap(),
                 trustlessGateway({ gateways: ['https://trustless-gateway.link'] })
-            ]
+            ],
         });
 
         fsInstance = unixfs(heliaInstance);
