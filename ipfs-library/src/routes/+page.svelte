@@ -1,7 +1,14 @@
 <script>
 import { parseCSV } from '$lib/csvParse';
+import BookPage from './BookPage.svelte';
+import { iniciarHelia } from '$lib/startHelia';
+import { unixfs } from '@helia/unixfs';
+const helia = iniciarHelia();
+const fs = unixfs(helia);
 
 const url = "http://localhost:8080/ipfs/QmNcou4jH6m3Jd6H5orQDWzoUVXsX8e6YmLsYcoCUhQUAB";
+
+
 
 const mod = 500;
 let pesquisa = $state('');
@@ -9,6 +16,8 @@ let start = $state(0);
 let end = $state(mod);
 let acervo = $state([]);
 let exibido = $state([]);
+let selecionado = $state();
+let metadados = $state();
 
 let fetchPromise = fetch(url)
 	.then(response => response.text())
@@ -53,7 +62,7 @@ function nextPage(){
 function prevPage(){
 	if (start > 0){
 		start -= mod;
-		end -= mod;;
+		end -= mod;
 		exibido = acervo.slice(start, end)
 	}
 	return;
@@ -81,9 +90,17 @@ Carregando acervo...
 		{#if exibido.length <= 0}
 			Livro não encontrado!
 			<button onclick={returnHome}>retorne ao acervo</button>
+		
+		{:else if selecionado != null}
+			<button onclick={() => selecionado = null}>retorne ao acervo</button>
+			<hr/>
+			<BookPage {selecionado}/>
 		{:else}
 			{#each exibido as linha (linha.id)}
-				<li><a href="http://localhost:8080/ipfs/{linha.cid}" download="{linha.title}.txt">{linha.title}</a></li>
+				<!-- <li><a href="http://localhost:8080/ipfs/{linha.cid}" download="{linha.title}.txt">{linha.title}</a></li> -->
+				 <li><a href="localhost:8080" onclick={() => {
+					selecionado = linha; 
+					return false;}}>{linha.title}</a></li>
 			{/each}
 		{/if}
 	</ul>
