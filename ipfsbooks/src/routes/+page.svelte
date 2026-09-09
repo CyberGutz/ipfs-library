@@ -40,6 +40,7 @@
 	{#if selecionado != null}
 		<BookPage {selecionado}/>
 	{:else}
+		<div class="grid">
 		{#each books as book}
 			<div>
 				<a href="localhost:8080" onclick={()=>{
@@ -51,5 +52,6 @@
 				<!-- <span> <button onclick={()=> downloadCID(book.cid, book.titulo, "text/plain")}>download</button></span> -->
 			</div>
 		{/each}
+		</div>
 	{/if}
 {/if}
