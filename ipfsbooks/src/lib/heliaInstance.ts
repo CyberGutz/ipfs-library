@@ -22,60 +22,91 @@ interface HeliaInstance {
 let heliaInstance: Helia | null = null;
 let fsInstance: UnixFS | null = null;
 
-const bootstrapNodes = [
-    // seu nó local, peerID corrigido — só funciona no mesmo navegador/máquina do daemon
-    "/ip4/127.0.0.1/tcp/4003/ws/p2p/12D3KooWERneYkvkxWfiuyegZ4QUHPdgR5K5ea9XERY32fwSeGrM",
-    // troque pelo multiaddr do SEU relay público assim que tiver um (ver seção CGNAT abaixo)
-];
-
 export async function startHelia(): Promise<HeliaInstance> {
-    if (heliaInstance && fsInstance) {
+    if (heliaInstance && fsInstance){
         return { helia: heliaInstance, fs: fsInstance };
     }
 
     const blockstore = new IDBBlockstore('ipfsbooks-blocks');
     await blockstore.open();
 
-    const datastore = new IDBDatastore('ipfsbooks-data');
+    const datastore = new IDBDatastore('ipfsboooks-data');
     await datastore.open();
 
-    try {
-        const node = await createLibp2p({
-            transports: [
-                webSockets(),
-                webRTC(),
-                circuitRelayTransport()
-            ],
-            addresses: {
-                listen: ['/p2p-circuit', '/webrtc']
-            },
-            connectionEncrypters: [noise()],
-            streamMuxers: [yamux()],
-            peerDiscovery: [
-                bootstrap({ list: bootstrapNodes })
-            ],
-            services: {
-                identify: identify()
-            }
-        });
-
+    try{
         heliaInstance = await createHelia({
-            blockstore,
-            datastore,
-            libp2p: node,
-            blockBrokers: [
-                bitswap(),
-                trustlessGateway({ gateways: ['https://trustless-gateway.link'] })
-            ],
+            blockstore: blockstore,
+            datastore: datastore
         });
 
         fsInstance = unixfs(heliaInstance);
-
         return { helia: heliaInstance, fs: fsInstance };
-    } catch (erro) {
-        // evita ficar com singleton "meio inicializado" numa próxima chamada
+    }
+    catch(erro){
         heliaInstance = null;
         fsInstance = null;
+        console.error("Erro ao iniciar a instância Helia: ", erro);
         throw erro;
     }
 }
+
+// let heliaInstance: Helia | null = null;
+// let fsInstance: UnixFS | null = null;
+
+// const bootstrapNodes = [
+//     // seu nó local, peerID corrigido — só funciona no mesmo navegador/máquina do daemon
+//     "/ip4/127.0.0.1/tcp/4003/ws/p2p/12D3KooWERneYkvkxWfiuyegZ4QUHPdgR5K5ea9XERY32fwSeGrM",
+//     // troque pelo multiaddr do SEU relay público assim que tiver um (ver seção CGNAT abaixo)
+// ];
+
+// export async function startHelia(): Promise<HeliaInstance> {
+//     if (heliaInstance && fsInstance) {
+//         return { helia: heliaInstance, fs: fsInstance };
+//     }
+
+//     const blockstore = new IDBBlockstore('ipfsbooks-blocks');
+//     await blockstore.open();
+
+//     const datastore = new IDBDatastore('ipfsbooks-data');
+//     await datastore.open();
+
+//     try {
+//         const node = await createLibp2p({
+//             transports: [
+//                 webSockets(),
+//                 webRTC(),
+//                 circuitRelayTransport()
+//             ],
+//             addresses: {
+//                 listen: ['/p2p-circuit', '/webrtc']
+//             },
+//             connectionEncrypters: [noise()],
+//             streamMuxers: [yamux()],
+//             peerDiscovery: [
+//                 bootstrap({ list: bootstrapNodes })
+//             ],
+//             services: {
+//                 identify: identify()
+//             }
+//         });
+
+//         heliaInstance = await createHelia({
+//             blockstore,
+//             datastore,
+//             libp2p: node,
+//             blockBrokers: [
+//                 bitswap(),
+//                 trustlessGateway({ gateways: ['https://trustless-gateway.link'] })
+//             ],
+//         });
+
+//         fsInstance = unixfs(heliaInstance);
+
+//         return { helia: heliaInstance, fs: fsInstance };
+//     } catch (erro) {
+//         // evita ficar com singleton "meio inicializado" numa próxima chamada
+//         heliaInstance = null;
+//         fsInstance = null;
+//         throw erro;
+//     }
+// }
