@@ -13,6 +13,11 @@ export interface Livro{
     isbn: string;
     categorias: string;
     cid: string;
+    genero: string;
+    capa: string;
+    capaFallback: string;
+    epub: string;
+    kindle: string;
 }
 
 
@@ -21,7 +26,7 @@ const db = new Dexie('AcervoDB') as Dexie & {
 };
 
 db.version(1).stores({
-        livros: '++id, formato, ano, titulo, lingua, autor, tags, isbn, categorias, cid'
+        livros: '++id, formato, ano, titulo, lingua, autor, tags, isbn, categorias, cid, genero, capa, capaFallback, epub, kindle'
 });
 
 export { db };
@@ -30,7 +35,7 @@ export async function catalogSync(){
     if(await db.livros.count() <= 0){
         try{
 		console.log("1. Banco vazio! Iniciando a busca pelo CID na rede")
-            const arq = await readCID('bafybeibwrtbhpjpsyoa534ypr7b63mmwgslscpgtsenuh66zdyn5os2rxa'); // CID está no pinata, pra contornar meus problemas com CGNAT.
+            const arq = await readCID('bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74'); // CID está no pinata, pra contornar meus problemas com CGNAT.
 
 		console.log("2. Arquivo encontrado e baixado! Tamanho:", arq.length);
         console.log("2.1 Arquivo em texto: ", arq.toString());

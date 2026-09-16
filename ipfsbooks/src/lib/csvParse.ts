@@ -14,6 +14,11 @@ export function parseCSV(file: any) {
                 isbn: linha.isbn,
                 categorias: linha.categories,
                 cid: linha.cid,
+                genero: linha.genero,
+                capa: linha.imageLink,
+                capaFallback: linha.imageLinkFallback,
+                epub: linha.epubLink,
+                kindle: linha.kindleLink,
             }))),
             error: (error: Error) => reject(error)
         });
