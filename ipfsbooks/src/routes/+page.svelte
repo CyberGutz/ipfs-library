@@ -1,5 +1,11 @@
 <script>
-	import { catalogSync, bookList, searchBooks, db } from "$lib/dbInstance";
+	import {
+		catalogSync,
+		bookList,
+		searchBooks,
+		filtrarGenero,
+		db,
+	} from "$lib/dbInstance";
 	import { onMount } from "svelte";
 	import BookPage from "./BookPage.svelte";
 
@@ -8,6 +14,22 @@
 	let page = $state(0);
 	let carregando = $state(true);
 	let pesquisa = $state("");
+	let generos = [
+		"Todos",
+		"Aventura",
+		"Contos",
+		"Fantasia",
+		"Faroeste",
+		"Ficção Científica",
+		"Ficção Geral",
+		"Ficção Histórica",
+		"Ficção Infantil",
+		"Humor e Sátira",
+		"Mistério e Suspense",
+		"Mitologia, Lendas e Folclore",
+		"Romance",
+		"Terror",
+	];
 
 	onMount(async () => {
 		await catalogSync();
@@ -22,6 +44,13 @@
 		}
 		selecionado = null;
 		books = await searchBooks(pesquisa);
+	}
+
+	async function filtrar(filtro) {
+		if (filtro == "Todos") {
+			returnHome();
+			return;
+		} else books = await filtrarGenero(filtro);
 	}
 
 	async function nextPage() {
@@ -41,7 +70,6 @@
 		selecionado = null;
 		books = await bookList(page, 50);
 	}
-
 </script>
 
 <div class="bg-olive-100 font-mono text-olive-800 h-screen w-screen">
@@ -84,6 +112,12 @@
 				placeholder="Bram Stoker's Dracula"
 				onkeydown={(e) => e.key === "Enter" && buscar()}
 			/>
+			<p class="m-3 p-3">Gênero:</p>
+			<select class="m-3">
+				{#each generos as genero}
+					<option onclick={() => filtrar(genero)}>{genero}</option>
+				{/each}
+			</select>
 		</div>
 		{#if selecionado != null}
 			<BookPage {selecionado} />
@@ -103,12 +137,10 @@
 				</p>
 			</div>
 		{:else}
-			<div
-				class="grid grid-flow-row grid-cols-5 gap-2 p-4"
-			>
+			<div class="grid grid-flow-row grid-cols-5 gap-2 p-4">
 				{#each books as book}
 					<div
-						class="bg-olive-200 justify-center hover:font-bold hover:bg-olive-800 hover:text-amber-50 text-center w-3xs h-3xs flex flex-col justify-items-center"
+						class="flex flex-col justify-center justify-items-center text-center w-3xs h-3xs bg-olive-200 hover:font-bold hover:bg-olive-800 hover:text-amber-50"
 					>
 						<a
 							href="localhost:8080"

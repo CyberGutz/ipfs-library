@@ -45,9 +45,7 @@
 		<!-- Div dos links de download -->
 		<p class="text-bold text-2xl p-3">Links de Download</p>
 		<div class="grid grid-flow-row grid-cols-2 p-3">
-			<p class="w-fit m-3 ml-0">
-				Baixar livro como um arquivo de texto:
-			</p>
+			<p class="w-fit m-3 ml-0">Baixar livro como um arquivo de texto:</p>
 			<div class="m-3">
 				<button
 					class="bg-olive-800 text-olive-50 border-2 border-olive-800 hover:bg-olive-50 hover:text-olive-800 hover:border-2 hover:border-olive-800 p-3 justify-self-end"
@@ -63,7 +61,8 @@
 			<div class="m-3">
 				<a
 					class="bg-olive-800 text-olive-50 border-2 border-olive-800 hover:bg-olive-50 hover:text-olive-800 hover:border-2 hover:border-olive-800 p-3 justify-self-end"
-					href={selecionado.epubLink}
+					href={selecionado.epub}
+					download
 				>
 					<button>Download</button>
 				</a>
@@ -72,8 +71,11 @@
 			<div class="m-3">
 				<a
 					class="bg-olive-800 text-olive-50 border-2 border-olive-800 hover:bg-olive-50 hover:text-olive-800 hover:border-2 hover:border-olive-800 p-3 justify-self-end"
-					href={selecionado.kindleLink}
+					href={selecionado.kindle}
+					download
 				>
+					<!--Descobri que não se pode colocar o nome do arquivo em um link de download que vem de outra origem, então quando
+					  o usuário for baixar um .mobi ou um .epub, ele vai ter o nome esquisito da indexação do gutemberg mesmo-->
 					<button>Download</button>
 				</a>
 			</div>
