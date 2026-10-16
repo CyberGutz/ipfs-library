@@ -12,6 +12,7 @@
 	let books = $state([]);
 	let selecionado = $state();
 	let page = $state(0);
+	let ordem = $state("");
 	let carregando = $state(true);
 	let pesquisa = $state("");
 	let generos = [
@@ -53,22 +54,32 @@
 		} else books = await filtrarGenero(filtro);
 	}
 
-	async function nextPage() {
-		page++;
-		const newBooks = await bookList(page, 50);
-		books = [...books, ...newBooks];
+	async function ordenarId(){
+		ordem = "id";
+		returnHome();
 	}
 
-	async function prevPage() {
-		if (page + 50 < 0) return;
-		page--;
-		const newBooks = await bookList(page, 50);
-		books = [...books, ...newBooks];
+	async function ordenarAz(){
+		ordem= "a-z";
+		returnHome();
+	}
+
+	async function ordenarData(){
+		ordem = "data";
+		returnHome();
+	}
+
+	async function pageChange(offset){
+		if ((page + offset) < 0)
+			return;
+		page = page + offset;
+		books = await bookList(page, 50, ordem);
 	}
 
 	async function returnHome() {
+		page = 0;
 		selecionado = null;
-		books = await bookList(page, 50);
+		books = await bookList(page, 50, ordem);
 	}
 </script>
 
@@ -97,11 +108,20 @@
 	{:else}
 		<div class="flex justify-center-safe p-3 pl-0">
 			<!--NAVBAR-->
-
+			<button
+				onclick={() => pageChange(-1)}
+				class="hover:font-bold hover:bg-olive-800 hover:text-amber-50 m-3 p-3"
+				>Anterior</button
+			>
 			<button
 				onclick={returnHome}
 				class="hover:font-bold hover:bg-olive-800 hover:text-amber-50 m-3 p-3"
 				>Home</button
+			>
+			<button
+				onclick={() => pageChange(1)}
+				class="hover:font-bold hover:bg-olive-800 hover:text-amber-50 m-3 p-3"
+				>Proxima</button
 			>
 			<p class="m-3 p-3">Busque um livro:</p>
 			<input
@@ -117,6 +137,12 @@
 				{#each generos as genero}
 					<option onclick={() => filtrar(genero)}>{genero}</option>
 				{/each}
+			</select>
+			<p class="m-3 p-3">Ordenar:</p>
+			<select class="m-3">
+					<option onclick={ordenarId}>Ordem de Lançamento</option>
+					<option onclick={ordenarAz}>A-Z</option>
+					<option onclick={ordenarData}>Data de Publicação</option>
 			</select>
 		</div>
 		{#if selecionado != null}

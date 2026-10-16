@@ -1,5 +1,5 @@
 import Dexie, { type EntityTable } from "dexie";
-import { readCID } from "./ipfsOperations";
+import { pinCID, readCID } from "./ipfsOperations";
 import { parseCSV } from "./csvParse";
 
 export interface Livro {
@@ -47,6 +47,9 @@ export async function catalogSync() {
             console.log("3.1 Arquivo parseado: ", parsed);
             console.log("3.2 DB: ", db.livros);
 
+            console.log("3.3 Tentando Pinar o CID do CSV: bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74")
+            await pinCID("bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74", arq);
+
             console.log("4. Finalizado!");
         }
 
@@ -57,11 +60,36 @@ export async function catalogSync() {
     return;
 }
 
-export async function bookList(offset: number = 0, limit: number = 50) {
-    return await db.livros
-        .offset(offset * limit)
-        .limit(limit)
-        .toArray();
+export async function bookList(offset: number = 0, limit: number = 50, ordem="id") {
+    switch (ordem) {
+        case "":
+            return await db.livros
+                .offset(offset * limit)
+                .limit(limit)
+                .toArray();
+        case "id":
+            return await db.livros
+                .offset(offset * limit)
+                .limit(limit)
+                .toArray();
+        case "a-z":
+            return await db.livros
+                .orderBy('titulo')
+                .offset(offset * limit)
+                .limit(limit)
+                .toArray();
+
+        case "data":
+            return await db.livros
+                .orderBy('ano')
+                .offset(offset * limit)
+                .limit(limit)
+                .toArray();
+    
+        default:
+            break;
+    }
+    
 }
 
 export async function searchBooks(termoBusca: string) {
