@@ -99,7 +99,7 @@ export async function pinCID(cidString:string="", bytes:Uint8Array=new Uint8Arra
 	}
 
 	try{
-		await helia.pins.add(cid);
+		helia.pins.add(cid);
 		const pin = await helia.pins.get(cid);
 		console.log("Arquivo pinado com sucesso!: ", pin);
 	}
