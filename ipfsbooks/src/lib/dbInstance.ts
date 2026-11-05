@@ -60,6 +60,10 @@ export async function catalogSync() {
     return;
 }
 
+export async function returnIdCount(){
+    return await db.livros.count();
+}
+
 export async function bookList(offset: number = 0, limit: number = 50, ordem="id") {
     switch (ordem) {
         case "":
