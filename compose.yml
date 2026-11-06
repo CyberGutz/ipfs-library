@@ -1,0 +1,58 @@
+## 1) construa o serviço definido neste arquivo .yaml:
+# docker compose build
+
+## 2) cria e inicializa o container: 
+# docker compose -f ./compose.yml up -d
+# sudo docker ps
+
+## 3) teste o IPFS WebUI:
+# http://webui.ipfs.io.ipns.localhost:8081/#/
+
+## 4) Se precisar debugar dentro do container, faça: 
+# sudo docker exec -it tcc-ipfsbooks-1 /usr/local/bin/ipfs --version
+# sudo docker exec -it tcc-ipfsbooks-1 /bin/bash 
+
+## 5) para "congelar" tudo, pausar/continar containeres
+# docker compose stop
+# docker compose start
+
+## 6) para finalizar tudo, interromper os containeres e REMOVÊ-LOS (tudo não persistido via volume será apagado!)
+# docker compose down
+
+name: tcc
+
+services:
+
+  ifpsbooks:
+    image: CyberGutz/ipfs-library # faça push do build do seu Dockerfile pro docker-hub.com
+    pull_policy: always
+    
+    #build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
+    #  context: https://github.com/CyberGutz/ipfs-library.git#main
+    #  dockerfile: Dockerfile
+    #  args:
+    #    APP_UID: ${APP_UID:-1000}
+    #    APP_GID: ${APP_GID:-1000}
+
+    network_mode: host
+
+    restart: unless-stopped
+    
+    init: true                    # PID 1 de verdade: repassa SIGTERM ao Python
+
+    stop_grace_period: 15s
+    
+    environment:
+      #KUBO_API: http://ipfs:5001    # nome do serviço: o Compose resolve como DNS
+    
+    ports:
+      # o swarm do libp2p precisa de caminho de entrada: sem isso o daemon só
+      # escuta em 172.18.0.x, os dois peers ficam dial-only e nunca se conectam.
+      # veio do serviço ipfs antigo e se perdeu quando o kubo migrou pra cá.
+      - "4002:4001/tcp"          # libp2p
+      - "4002:4001/udp"          # libp2p via QUIC
+      - "5002:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
+      - "8081:8080"              # Local Gateway WebUI
+    
+    volumes:
+      - ~/.ifpsbooks_bootstrap:/root/.ipfs
