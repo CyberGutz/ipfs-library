@@ -22,37 +22,53 @@
 name: tcc
 
 services:
-
+  # # O container que tem o serviço do IPFS. Não dá pra usar ele direto, porque o daemon toma conta do espaço de execução.
+  # ipfs:
+  #   image: ipfs/kubo:v0.43.1
+  #   pull_policy: always
+  #   restart: unless-stopped
+  #   volumes: ipfs-data:data/ipfs
+  #   ports:
+  #     # o swarm do libp2p precisa de caminho de entrada: sem isso o daemon só
+  #     # escuta em 172.18.0.x, os dois peers ficam dial-only e nunca se conectam.
+  #     # veio do serviço ipfs antigo e se perdeu quando o kubo migrou pra cá.
+  #     - "4002:4001/tcp"          # libp2p
+  #     - "4002:4001/udp"          # libp2p via QUIC
+  #     - "5002:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
+  #     - "8081:8080"              # Local Gateway WebUI
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "IPFS --API=/ip4/127.0.0.1/tcp/5002 swarm peers >/dev/null 2>&1 || exit 1"]
+  #     interval: 10s
+  #     retries: 6
+  #     start_period: 30s
+  # O container que vai usar o ipfs
   ifpsbooks:
-    image: CyberGutz/ipfs-library # faça push do build do seu Dockerfile pro docker-hub.com
+    image: CyberGutz/ipfsbooks-bootstraper # faça push do build do seu Dockerfile pro docker-hub.com
     pull_policy: always
     
-    #build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
-    #  context: https://github.com/CyberGutz/ipfs-library.git#main
-    #  dockerfile: Dockerfile
-    #  args:
-    #    APP_UID: ${APP_UID:-1000}
-    #    APP_GID: ${APP_GID:-1000}
-
+    build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
+     context: https://github.com/CyberGutz/ipfs-library.git#main
+     dockerfile: Dockerfile
+     args:
+       APP_UID: ${APP_UID:-1000}
+       APP_GID: ${APP_GID:-1000}
     network_mode: host
-
     restart: unless-stopped
-    
     init: true                    # PID 1 de verdade: repassa SIGTERM ao Python
-
     stop_grace_period: 15s
-    
+    # depends_on:
+    #   ipfs: { condition: service_healthy }    
     environment:
-      #KUBO_API: http://ipfs:5001    # nome do serviço: o Compose resolve como DNS
+      KUBO_API: http://ipfs:5001    # nome do serviço: o Compose resolve como DNS
     
     ports:
       # o swarm do libp2p precisa de caminho de entrada: sem isso o daemon só
       # escuta em 172.18.0.x, os dois peers ficam dial-only e nunca se conectam.
       # veio do serviço ipfs antigo e se perdeu quando o kubo migrou pra cá.
-      - "4002:4001/tcp"          # libp2p
-      - "4002:4001/udp"          # libp2p via QUIC
-      - "5002:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
-      - "8081:8080"              # Local Gateway WebUI
-    
+      # Coloquei as portas como 4008, 5008, etc. porque talvez, existam várias instâncias IPFS no host do usuário
+      - "4008:4001/tcp"          # libp2p
+      - "4008:4001/udp"          # libp2p via QUIC
+      - "5008:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
+      - "8088:8080"              # Local Gateway WebUI
     volumes:
-      - ~/.ifpsbooks_bootstrap:/root/.ipfs
+      - ~/.ifpsbooks_bootstraper:/root/.ipfs
