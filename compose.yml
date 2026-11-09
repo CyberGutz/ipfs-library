@@ -46,13 +46,13 @@ services:
     image: cybergutz/ipfsbooks-bootstraper:latest # faça push do build do seu Dockerfile pro docker-hub.com
     pull_policy: always
     
-    build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
-    # Comente essa linha se precisar debugar
+    # build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
+    # # Comente essa linha se precisar debugar
     #  context: https://github.com/CyberGutz/ipfs-library.git#main
-     dockerfile: Dockerfile
-     args:
-       APP_UID: ${APP_UID:-1000}
-       APP_GID: ${APP_GID:-1000}
+    #  dockerfile: Dockerfile
+    #  args:
+    #    APP_UID: ${APP_UID:-1000}
+    #    APP_GID: ${APP_GID:-1000}
     network_mode: host
     restart: unless-stopped
     init: true                    # PID 1 de verdade: repassa SIGTERM ao Python
