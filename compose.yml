@@ -43,12 +43,12 @@ services:
   #     start_period: 30s
   # O container que vai usar o ipfs
   ifpsbooks:
-    image: CyberGutz/ipfsbooks-bootstraper # faça push do build do seu Dockerfile pro docker-hub.com
+    image: cybergutz/ipfsbooks-bootstraper:latest # faça push do build do seu Dockerfile pro docker-hub.com
     pull_policy: always
     
     build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
     # Comente essa linha se precisar debugar
-     context: https://github.com/CyberGutz/ipfs-library.git#main
+    #  context: https://github.com/CyberGutz/ipfs-library.git#main
      dockerfile: Dockerfile
      args:
        APP_UID: ${APP_UID:-1000}

@@ -15,6 +15,7 @@ RUN wget --no-check-certificate https://github.com/ipfs/kubo/releases/download/v
 RUN tar -xvzf kubo_v0.43.1_linux-${TARGETARCH}.tar.gz && \
    cd kubo && sh install.sh && cd ..  && \
    ipfs --version
+RUN ipfs init
 ## Se previsar baixar todo seu repositório git (precisa fazer antes: apt-get install git)
 # RUN git clone -b main https://github.com/CyberGutz/ipfs-library.git /TCC
 # RUN mv /TCC/* /app
@@ -22,10 +23,10 @@ RUN tar -xvzf kubo_v0.43.1_linux-${TARGETARCH}.tar.gz && \
 ## Pra salvar logs de provisionamento
 RUN mkdir -p /data
 
-## bash script que faz os ipfs get, pin, durante o build
-COPY ./get-and-pin.sh /app/get-and-pin.sh
-RUN chmod +x /app/get-and-pin.sh
-RUN /app/get-and-pin.sh
+# ## bash script que faz os ipfs get, pin, durante o build
+# COPY ./get-and-pin.sh /app/get-and-pin.sh
+# RUN chmod +x /app/get-and-pin.sh
+# RUN /app/get-and-pin.sh
 
 ## bash script que fará o ipfs provide (em loop)
 COPY ./provide.sh /app/provide.sh
