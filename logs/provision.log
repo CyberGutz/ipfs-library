@@ -1,0 +1,434 @@
+[2026-11-09 15:33:37] **** IPFSBooks bootstrap provider ****
+[2026-11-09 15:33:37] API do kubo respondeu
+[2026-11-09 15:33:37] Pinando CSV do acervo (/ipfs/bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74)
+pinned bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74 recursively
+[2026-11-09 15:33:40] OK: CSV do acervo
+[2026-11-09 15:33:40] Pinando livros (/ipfs/bafybeie62easb72odjenpgkmjacw5c6kyrjkzytuxwn2qb42lhujgsajse)
+Error: context deadline exceeded
+[2026-11-09 16:03:40] FALHOU: livros (tento de novo no próximo ciclo)
+[2026-11-09 16:04:14] Pinando homepage (/ipfs/QmNjxxzTZFWHmRSTAZvQp43VArW2PTvt5yCW2RV9UkYJTF)
+Error: context deadline exceeded
+[2026-11-09 16:34:14] FALHOU: homepage (tento de novo no próximo ciclo)
+[2026-11-09 16:34:14] Ciclo concluído. Próximo em 6h
+[2026-11-09 19:45:03] **** IPFSBooks bootstrap provider ****
+[2026-11-09 19:45:03] API do kubo respondeu
+[2026-11-09 19:45:03] PeerID deste nó: 12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+[2026-11-09 19:45:03] Endereços anunciados:
+    /ip4/127.0.0.1/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/tcp/31482/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31491/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31491/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31491/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL[2026-11-09 19:45:03] STATUS: 35 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 0
+    	blocks sent: 0
+    	data received: 0 B
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [3]
+    Bandwidth
+    TotalIn: 504 kB
+    TotalOut: 96 kB
+    RateIn: 50 kB/s
+    RateOut: 10 kB/s
+[2026-11-09 19:45:03] Pinando CSV do acervo (/ipfs/bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74)
+[2026-11-09 19:45:23]   provedores achados na DHT (até 10): 4
+pinned bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74 recursively
+[2026-11-09 19:45:23] OK: CSV do acervo
+[2026-11-09 19:45:23] Pinando livros (/ipfs/bafybeie62easb72odjenpgkmjacw5c6kyrjkzytuxwn2qb42lhujgsajse)
+[2026-11-09 19:45:43]   provedores achados na DHT (até 10): 1
+pinned bafybeie62easb72odjenpgkmjacw5c6kyrjkzytuxwn2qb42lhujgsajse recursively
+[2026-11-09 19:46:01] OK: livros
+[2026-11-09 19:46:01] Pinando homepage (/ipfs/QmNjxxzTZFWHmRSTAZvQp43VArW2PTvt5yCW2RV9UkYJTF)
+[2026-11-09 19:46:21]   provedores achados na DHT (até 10): 0
+pinned QmNjxxzTZFWHmRSTAZvQp43VArW2PTvt5yCW2RV9UkYJTF recursively
+[2026-11-09 19:46:21] OK: homepage
+[2026-11-09 19:46:21] Ciclo concluído. Próximo em 6h
+[2026-11-09 19:50:03] STATUS: 418 pares conectados (2 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [19]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 43 MB
+    RateIn: 84 kB/s
+    RateOut: 12 kB/s
+[2026-11-09 19:55:03] STATUS: 205 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [22]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 86 MB
+    RateIn: 54 kB/s
+    RateOut: 504 kB/s
+[2026-11-09 20:00:04] STATUS: 86 pares conectados (1 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [9]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 152 MB
+    RateIn: 9.2 kB/s
+    RateOut: 558 kB/s
+[2026-11-09 20:05:04] STATUS: 46 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [7]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 154 MB
+    RateIn: 7.5 kB/s
+    RateOut: 3.3 kB/s
+[2026-11-09 20:10:04] STATUS: 22 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [4]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 154 MB
+    RateIn: 130 B/s
+    RateOut: 9 B/s
+[2026-11-09 20:15:04] STATUS: 38 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [6]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 154 MB
+    RateIn: 4.9 kB/s
+    RateOut: 2.3 kB/s
+[2026-11-09 20:20:04] STATUS: 25 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [3]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 155 MB
+    RateIn: 657 B/s
+    RateOut: 846 B/s
+[2026-11-09 20:25:04] STATUS: 41 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [5]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 156 MB
+    RateIn: 1.7 kB/s
+    RateOut: 501 B/s
+[2026-11-09 20:30:04] STATUS: 23 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 157 MB
+    RateIn: 461 B/s
+    RateOut: 3 B/s
+[2026-11-09 20:35:04] STATUS: 37 pares conectados (1 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 157 MB
+    RateIn: 913 B/s
+    RateOut: 396 B/s
+[2026-11-09 20:40:04] STATUS: 24 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 157 MB
+    RateIn: 461 B/s
+    RateOut: 3 B/s
+[2026-11-09 20:45:05] STATUS: 76 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [6]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 159 MB
+    RateIn: 2.9 kB/s
+    RateOut: 1.0 kB/s
+[2026-11-09 20:50:05] STATUS: 24 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 160 MB
+    RateIn: 244 B/s
+    RateOut: 343 B/s
+[2026-11-09 20:55:05] STATUS: 41 pares conectados (2 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [5]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 160 MB
+    RateIn: 2.7 kB/s
+    RateOut: 812 B/s
+[2026-11-09 21:00:05] STATUS: 21 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 160 MB
+    RateIn: 8 B/s
+    RateOut: 1 B/s
+[2026-11-09 21:05:05] STATUS: 22 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.1 GB
+    TotalOut: 161 MB
+    RateIn: 15 B/s
+    RateOut: 3 B/s
+[2026-11-09 21:10:05] STATUS: 19 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 162 MB
+    RateIn: 12 B/s
+    RateOut: 6 B/s
+[2026-11-09 21:15:06] STATUS: 50 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [6]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 163 MB
+    RateIn: 894 B/s
+    RateOut: 253 B/s
+[2026-11-09 21:20:06] STATUS: 28 pares conectados (2 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 163 MB
+    RateIn: 19 B/s
+    RateOut: 5 B/s
+[2026-11-09 21:25:06] STATUS: 66 pares conectados (4 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [5]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 164 MB
+    RateIn: 12 kB/s
+    RateOut: 2.5 kB/s
+[2026-11-09 21:30:06] STATUS: 22 pares conectados (2 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 165 MB
+    RateIn: 713 B/s
+    RateOut: 960 B/s
+[2026-11-09 21:35:06] STATUS: 39 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [5]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 165 MB
+    RateIn: 5.2 kB/s
+    RateOut: 849 B/s
+[2026-11-09 21:40:06] STATUS: 32 pares conectados (5 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 166 MB
+    RateIn: 326 B/s
+    RateOut: 403 B/s
+[2026-11-09 21:45:06] STATUS: 81 pares conectados (3 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [5]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 166 MB
+    RateIn: 3.0 kB/s
+    RateOut: 1.8 kB/s
+[2026-11-09 21:50:06] STATUS: 19 pares conectados (1 via relay)
+    bitswap status
+    	blocks received: 13718
+    	blocks sent: 0
+    	data received: 2.0 GB
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [2]
+    Bandwidth
+    TotalIn: 2.2 GB
+    TotalOut: 168 MB
+    RateIn: 42 B/s
+    RateOut: 37 B/s

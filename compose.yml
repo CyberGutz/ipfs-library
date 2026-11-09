@@ -1,76 +1,47 @@
-## 1) construa o serviço definido neste arquivo .yaml:
-# docker compose build
+## Dois serviços que se falam pela rede interna do Compose (SEM network_mode: host):
+##   kubo:     só o daemon IPFS (imagem oficial)
+##   provider: baixa/pina os CIDs do projeto chamando a API do kubo
+##
+## Subir:  docker compose up -d
+## Logs:   docker compose logs -f      (e ./logs/provision.log)
+## Parar:  docker compose down         (o repo do IPFS fica no volume ipfs_repo)
 
-## 2) cria e inicializa o container: 
-# docker compose -f ./compose.yml up -d
-# sudo docker ps
-
-## 3) teste o IPFS WebUI:
-# http://webui.ipfs.io.ipns.localhost:8081/#/
-
-## 4) Se precisar debugar dentro do container, faça: 
-# sudo docker exec -it tcc-ipfsbooks-1 /usr/local/bin/ipfs --version
-# sudo docker exec -it tcc-ipfsbooks-1 /bin/bash 
-
-## 5) para "congelar" tudo, pausar/continar containeres
-# docker compose stop
-# docker compose start
-
-## 6) para finalizar tudo, interromper os containeres e REMOVÊ-LOS (tudo não persistido via volume será apagado!)
-# docker compose down
-
-name: tcc
+name: ipfsbooks
 
 services:
-  # # O container que tem o serviço do IPFS. Não dá pra usar ele direto, porque o daemon toma conta do espaço de execução.
-  # ipfs:
-  #   image: ipfs/kubo:v0.43.1
-  #   pull_policy: always
-  #   restart: unless-stopped
-  #   volumes: ipfs-data:data/ipfs
-  #   ports:
-  #     # o swarm do libp2p precisa de caminho de entrada: sem isso o daemon só
-  #     # escuta em 172.18.0.x, os dois peers ficam dial-only e nunca se conectam.
-  #     # veio do serviço ipfs antigo e se perdeu quando o kubo migrou pra cá.
-  #     - "4002:4001/tcp"          # libp2p
-  #     - "4002:4001/udp"          # libp2p via QUIC
-  #     - "5002:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
-  #     - "8081:8080"              # Local Gateway WebUI
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "IPFS --API=/ip4/127.0.0.1/tcp/5002 swarm peers >/dev/null 2>&1 || exit 1"]
-  #     interval: 10s
-  #     retries: 6
-  #     start_period: 30s
-  # O container que vai usar o ipfs
-  ifpsbooks:
-    image: cybergutz/ipfsbooks-bootstraper:latest # faça push do build do seu Dockerfile pro docker-hub.com
-    pull_policy: always
-    
-    # build: ## resolvi colocar no Dockerfile ao invés de fazer build toda vez por aqui
-    # # Comente essa linha se precisar debugar
-    #  context: https://github.com/CyberGutz/ipfs-library.git#main
-    #  dockerfile: Dockerfile
-    #  args:
-    #    APP_UID: ${APP_UID:-1000}
-    #    APP_GID: ${APP_GID:-1000}
-    network_mode: host
+  kubo:
+    image: ipfs/kubo:v0.43.1
     restart: unless-stopped
-    init: true                    # PID 1 de verdade: repassa SIGTERM ao Python
-    stop_grace_period: 15s
-    # depends_on:
-    #   ipfs: { condition: service_healthy }    
-    environment:
-      KUBO_API: http://ipfs:5001    # nome do serviço: o Compose resolve como DNS
-    
     ports:
-      # o swarm do libp2p precisa de caminho de entrada: sem isso o daemon só
-      # escuta em 172.18.0.x, os dois peers ficam dial-only e nunca se conectam.
-      # veio do serviço ipfs antigo e se perdeu quando o kubo migrou pra cá.
-      # Coloquei as portas como 4008, 5008, etc. porque talvez, existam várias instâncias IPFS no host do usuário
-      - "4008:4001/tcp"          # libp2p
-      - "4008:4001/udp"          # libp2p via QUIC
-      - "5008:5001"              # RPC = admin sem autenticação: NUNCA em 0.0.0.0
-      - "8088:8080"              # Local Gateway WebUI
+      # swarm (libp2p): caminho de entrada para outros peers.
+      # Se mudar a porta externa (4008), o Kubo continua anunciando a 4001 interna;
+      # tudo bem na LAN, mas para a internet configure Addresses.AppendAnnounce.
+      - "4008:4001/tcp"
+      - "4008:4001/udp"
+      # RPC (admin sem autenticação!) e gateway: SÓ no localhost do host
+      - "127.0.0.1:5008:5001"
+      - "127.0.0.1:8088:8080"
     volumes:
-      - ~/.ifpsbooks_bootstraper/ipfs:/root/.ipfs
-      - ~/.ipfsbooks_bootstraper/logs:/data
+      - ipfs_repo:/data/ipfs
+    healthcheck:
+      test: ["CMD-SHELL", "ipfs --api /ip4/127.0.0.1/tcp/5001 id > /dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+  provider:
+    image: ipfs/kubo:v0.43.1 # só para ter o binário `ipfs` como cliente da API
+    restart: unless-stopped
+    depends_on:
+      kubo:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "/provision.sh"]
+    environment:
+      IPFS_API: /dns4/kubo/tcp/5001 # "kubo" = nome do serviço, o Compose resolve como DNS
+    volumes:
+      - ./provision.sh:/provision.sh:ro
+      - ./logs:/logs
+
+volumes:
+  ipfs_repo:
