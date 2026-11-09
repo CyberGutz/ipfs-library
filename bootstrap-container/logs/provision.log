@@ -1,0 +1,46 @@
+[2026-11-09 22:44:33] **** IPFSBooks bootstrap provider ****
+[2026-11-09 22:44:33] API do kubo respondeu
+[2026-11-09 22:44:33] PeerID deste nó: 12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+[2026-11-09 22:44:33] Endereços anunciados:
+    /ip4/127.0.0.1/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/127.0.0.1/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/172.18.0.2/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31306/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31306/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip4/45.168.202.103/udp/31306/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/tcp/4001/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/quic-v1/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/quic-v1/webtransport/certhash/uEiD0a5cxoaLrh3EC9SzwX-pAz9wjqNR2TcbhiMLXAqwucQ/certhash/uEiCJYgZ4By19P2k0BoXXXzOMTmjtIFx-RrKldB8l0hXjTA/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL
+    /ip6/::1/udp/4001/webrtc-direct/certhash/uEiCwgDzzkba_otrqft-j2hwRh6AAyYddIyPXzhlQ5en4UQ/p2p/12D3KooWDsK7vNC8RP1D9c4Hvt41g56dKVSFaqJRik2vxmE5GXBL[2026-11-09 22:44:33] STATUS: 32 pares conectados (0 via relay)
+    bitswap status
+    	blocks received: 0
+    	blocks sent: 0
+    	data received: 0 B
+    	data sent: 0 B
+    	dup blocks received: 0
+    	dup data received: 0 B
+    	wantlist [0 keys]
+    	partners [3]
+    Bandwidth
+    TotalIn: 479 kB
+    TotalOut: 89 kB
+    RateIn: 60 kB/s
+    RateOut: 8.1 kB/s
+[2026-11-09 22:44:33] Pinando CSV do acervo (/ipfs/bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74)
+[2026-11-09 22:44:53]   provedores achados na DHT (até 10): 4
+pinned bafybeieqjjcdiz4hx3jh6txzjooqsm7bfnnbs5udnzs7gqrk4zpecrbe74 recursively
+[2026-11-09 22:44:53] OK: CSV do acervo
+[2026-11-09 22:44:53] Pinando livros (/ipfs/bafybeie62easb72odjenpgkmjacw5c6kyrjkzytuxwn2qb42lhujgsajse)
+[2026-11-09 22:45:13]   provedores achados na DHT (até 10): 2
+pinned bafybeie62easb72odjenpgkmjacw5c6kyrjkzytuxwn2qb42lhujgsajse recursively
+[2026-11-09 22:45:15] OK: livros
+[2026-11-09 22:45:15] Pinando homepage (/ipfs/QmNjxxzTZFWHmRSTAZvQp43VArW2PTvt5yCW2RV9UkYJTF)
+[2026-11-09 22:45:34]   provedores achados na DHT (até 10): 1
+pinned QmNjxxzTZFWHmRSTAZvQp43VArW2PTvt5yCW2RV9UkYJTF recursively
+[2026-11-09 22:45:35] OK: homepage
+[2026-11-09 22:45:35] Ciclo concluído. Próximo em 6h
